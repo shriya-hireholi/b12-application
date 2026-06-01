@@ -1,0 +1,21 @@
+name: B12 Application Submission
+
+on:
+  workflow_dispatch:
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Submit application to B12
+        env:
+          B12_SIGNING_SECRET: ${{ secrets.B12_SIGNING_SECRET }}
+          APPLICANT_NAME: "Shriya Hireholi"
+          APPLICANT_EMAIL: "shriyah98@gmail.com"
+          RESUME_LINK: "https://docs.google.com/document/d/1MBbpyIYD7QroJUkyDRPvY1SBJtP-OiwvhL5hGjB03FI/edit?usp=sharing"
+          REPOSITORY_LINK: "${{ github.server_url }}/${{ github.repository }}"
+          ACTION_RUN_LINK: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: python submit.py
